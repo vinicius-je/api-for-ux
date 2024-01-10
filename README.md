@@ -4,7 +4,7 @@
   <summary>Retorna os projetos</summary>
 
 ```
-  GET https://api-m3jb.onrender.com/projetos/1)https://api-m3jb.onrender.com/projetos
+  GET https://api-m3jb.onrender.com/projetos
 ```
 
 ```
@@ -96,7 +96,7 @@
   <summary>Retorna as pessoas</summary>
 
 ```
-  GET https://api-m3jb.onrender.com/projetos/1)https://api-m3jb.onrender.com/pessoas
+  GET https://api-m3jb.onrender.com/pessoas
 ```
 
 ```
