@@ -1,10 +1,14 @@
-var express = require('express');
-var app = express();
-var db = require("./database/db.json");
-var bodyParser = require("body-parser");
+const express = require('express');
+const app = express();
+const bodyParser = require("body-parser");
+const cors = require('cors');
 const fs = require("fs");
 
+const db = require("./database/db.json");
+
+app.use(cors());
 app.use(bodyParser.json());
+
 const PORT = 3000;
 
 const generateID = () => {
