@@ -15,16 +15,16 @@ app.listen(PORT, () => {
     console.log(`Server is running at ${PORT}.`)
 });
 
-app.get("/pessoas", (req, res) => {
+app.get("/pessoas", async (req, res) => {
     res.json(db.pessoas);
 })
 
-app.get("/pessoas/:id", (req, res) => {
+app.get("/pessoas/:id", async (req, res) => {
     const pessoa = db.pessoas.filter(x => x.id == req.params.id)[0];
     res.json(pessoa);
 })
 
-app.post("/pessoas", (req, res) => {
+app.post("/pessoas", async (req, res) => {
     const novaPessoa = req.body;
     novaPessoa.id = generateID();
     db.pessoas.push(novaPessoa);
@@ -32,7 +32,14 @@ app.post("/pessoas", (req, res) => {
     res.json(novaPessoa);
 })
 
-app.get("/projetos", (req, res) => {
+app.delete("/pessoas/:id", async (req, res) => {
+    let index = db.pessoas.findIndex(x => x.id == req.params.id);
+    db.pessoas.splice(index, 1);
+    fs.writeFileSync("./database/db.json", JSON.stringify(db));
+    res.send("Pessoa deletada com sucesso"); 
+})
+
+app.get("/projetos", async (req, res) => {
     res.json(db.projetos)
 })
 
@@ -59,4 +66,11 @@ app.post("/projetos", async (req, res) => {
     db.projetos.push(novoProjeto);
     fs.writeFileSync("./database/db.json", JSON.stringify(db));
     res.json(novoProjeto);
+})
+
+app.delete("/projetos/:id", async (req, res) => {
+    const index = db.projetos.findIndex(x => x.id == req.params.id);
+    db.projetos.splice(index, 1);
+    fs.writeFileSync("./database/db.json", JSON.stringify(db));
+    res.send("Projeto deletado com sucesso");
 })
